@@ -1,3 +1,4 @@
+import ImageCarousel from "@/components/Common/ImageCarousel";
 import { getProduct } from "@/services/products";
 
 export default async function ProductPage({
@@ -6,14 +7,12 @@ export default async function ProductPage({
   params: { id: string };
 }) {
   const { id } = await params;
-
   const product = await getProduct(id);
-  console.log(params, "params");
-
-  console.log(product.stock, "product");
 
   return (
-    <div className="p-6 grid grid-cols-2 gap-8">
+    <div className="p-6 grid md:grid-cols-2 gap-8">
+      <ImageCarousel images={product.images} />
+
       <div>
         <h1 className="text-3xl font-bold">{product.title}</h1>
         <p>{product.description}</p>
