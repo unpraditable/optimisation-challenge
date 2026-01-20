@@ -9,3 +9,10 @@ export async function getProducts(): Promise<Product[]> {
   const json = await res.json();
   return json.products;
 }
+
+export async function getProduct(id: string): Promise<Product> {
+  const res = await fetch(`${BASE_URL}/products/${id}`, {
+    next: { revalidate: 300 },
+  });
+  return res.json();
+}
