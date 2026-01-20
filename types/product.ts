@@ -8,3 +8,8 @@ export interface Product {
   category: string;
   stock: number;
 }
+
+export interface Category {
+  name: string;
+  slug: string;
+}

@@ -1,4 +1,4 @@
-import { Product } from "@/types/product";
+import { Category, Product } from "@/types/product";
 
 const BASE_URL = "https://dummyjson.com";
 
@@ -14,5 +14,10 @@ export async function getProduct(id: string): Promise<Product> {
   const res = await fetch(`${BASE_URL}/products/${id}`, {
     next: { revalidate: 300 },
   });
+  return res.json();
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const res = await fetch(`${BASE_URL}/products/categories`);
   return res.json();
 }
