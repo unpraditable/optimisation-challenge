@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 export default function ImageCarousel({ images }: { images: string[] }) {
@@ -17,17 +18,23 @@ export default function ImageCarousel({ images }: { images: string[] }) {
     <div>
       <div className="relative w-full h-[400px] overflow-hidden">
         {images.map((src, i) => (
-          <img
+          <div
             key={src}
-            src={src}
-            alt=""
             className={`
               absolute inset-0
-              w-[500px] h-[400px] mx-auto object-contain
               transition-opacity duration-200 ease-in-out
               ${i === index ? "opacity-100" : "opacity-0 pointer-events-none"}
             `}
-          />
+          >
+            <Image
+              src={src}
+              alt={`Product image ${i + 1}`}
+              fill
+              className="object-contain"
+              sizes="500px"
+              priority={i === 0}
+            />
+          </div>
         ))}
 
         <button
@@ -46,15 +53,23 @@ export default function ImageCarousel({ images }: { images: string[] }) {
       </div>
 
       <div className="flex gap-2 mt-2 justify-center">
-        {images.map((img, i) => (
-          <img
-            key={img}
-            src={img}
-            className={`w-16 h-16 object-cover cursor-pointer border transition
+        {images.map((src, i) => (
+          <div
+            key={src}
+            className={`
+              relative w-16 h-16 cursor-pointer border transition
               ${i === index ? "border-black scale-105" : "border-transparent opacity-70"}
             `}
             onClick={() => setIndex(i)}
-          />
+          >
+            <Image
+              src={src}
+              alt={`Thumbnail ${i + 1}`}
+              fill
+              className="object-cover"
+              sizes="64px"
+            />
+          </div>
         ))}
       </div>
     </div>
