@@ -18,6 +18,8 @@ export async function getProduct(id: string): Promise<Product> {
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const res = await fetch(`${BASE_URL}/products/categories`);
+  const res = await fetch(`${BASE_URL}/products/categories`, {
+    next: { revalidate: 300 },
+  });
   return res.json();
 }
